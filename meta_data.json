@@ -1,0 +1,14 @@
+{
+    "categories": {
+        "0": "internationalization",
+        "1": "mobile",
+        "2": "data (things)"
+    },
+    "data_tracked": true,
+    "data_tracked_description": "This author has not yet disclosed their data usage policy. Learn more by contacting the author.",
+    "description": "Easily enter phone numbers with a handy box that includes a country selector. Just pick your country, and the number format will adjust automatically.",
+    "image": "//meta-q.cdn.bubble.io/f1758134761641x428508056674004030/International%20phone%20input.png",
+    "license": "open_source",
+    "name": "Phone Input – CoBP",
+    "sa_node_version": 18
+}
