@@ -1,4 +1,122 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css"/>
-<link rel="stylesheet" href="https://dd7tel2830j4w.cloudfront.net/f1656933392022x449610206273435700/intl-tel-input-dropd-above-popup.css"/>
-<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js" as="script" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@25.10.10/build/css/intlTelInput.css"/>
+<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@25.10.10/build/js/intlTelInput.min.js" defer></script>
+
+<style>
+:root {
+  --iti-hover-color: rgba(0, 0, 0, 0.05); /* BG For Button hover */
+  --iti-color: #1f2937; /* Input text color */
+  --iti-bg-color: #f9fafb; /* Input bg color */
+  --iti-input-placeholder-color: #9ca3af; /* Input placeholder color */
+  --iti-border-color: #ccc; /* Dropdown border color */
+  --iti-dropdown-bg: white; /* All items bg col in dropdown */
+  --iti-border-width: 1px; /* Dropdown border width */
+  --iti-arrow-color: #444; /* Button arrow color */
+  --iti-border-radius: 8px; /* Border radius for input */
+  --iti-focus-border-color: #4f46e5; /* Border color on focus */
+  --iti-highlight-bg-color: #4f46e5; /* BG color for highlighted item */
+}
+
+.iti {
+  width: 100%;
+  height: max-content;
+}
+
+.iti--container {
+  z-index: 999999 !important;
+}
+
+/* Styling for the main container and input field */
+.iti__dropdown-content {
+  font-family: ui-sans-serif, system-ui, sans-serif;
+}
+
+.iti .iti__tel-input {
+  padding: 12px 16px;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--iti-color);
+  background-color: var(--iti-bg-color);
+  border: var(--iti-border-width) solid var(--iti-border-color);
+  border-radius: var(--iti-border-radius);
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  transition: border-color 0.2s, box-shadow 0.2s;
+  width: 100%;
+}
+
+.iti__selected-dial-code {
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--iti-color);
+  background-color: var(--iti-bg-color);
+}
+
+.iti .iti__tel-input::placeholder {
+  color: var(--iti-input-placeholder-color);
+  opacity: 1; /* Firefox */
+}
+
+.iti .iti__search-input {
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--iti-color);
+  background-color: var(--iti-bg-color);
+  /* border: 1px solid var(--iti-border-color); */
+  /* border-radius: 8px; */
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  padding: 8px 12px;
+  width: 100%;
+}
+
+.iti .iti__search-icon {
+  display: none;
+}
+
+/* Focus and hover states */
+.iti .iti__tel-input:focus,
+.iti .iti__tel-input:hover,
+.iti__country-container:focus,
+.iti__country-container:hover {
+  border-color: var(--iti-focus-border-color);
+}
+
+.iti .iti__tel-input:focus-visible,
+.iti__country-container:focus-visible,
+.iti .iti__search-input:focus-visible {
+  outline: initial;
+}
+
+/* Styling for the dropdown menu */
+.iti__dropdown-content {
+  border: var(--iti-border-width) solid var(--iti-border-color);
+  border-radius: var(--iti-border-radius);
+  background-color: var(--iti-input-bg-color);
+  overflow-y: auto;
+}
+
+.iti__country-list {
+  padding: 0;
+  margin: 0;
+}
+
+.iti__country {
+  padding: 8px 14px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.iti__country-name,
+.iti__dial-code {
+  color: var(--iti-color);
+}
+
+.iti__dial-code {
+  opacity: 0.6;
+}
+
+/* Hover and highlight states for dropdown items */
+.iti__country:hover,
+.iti__country.iti__highlight {
+  background-color: var(--iti-highlight-bg-color);
+}
+</style>

@@ -1,22 +1,25 @@
 function(instance, properties) {
-  window.canvasPhoneInputCount = (window.canvasPhoneInputCount ?? 0) + 1;
+    const input = document.createElement("input");
+    input.width = instance.canvas.width();
+    input.height = instance.canvas.height();
+    instance.data.htmlInput = input;
 
-  const randomId = Math.floor((1 + Math.random()) * 10000)
-    .toString(16)
-    .substring(1);
+    instance.canvas.append(input);
 
-  instance.data.id = `input-${randomId}`;
+    instance.data.phoneInput = window.intlTelInput(input, {
+        loadUtils: () =>
+            import(
+            "https://cdn.jsdelivr.net/npm/intl-tel-input@25.10.10/build/js/utils.js"
+            ),
+          countryOrder: ["mg", "gb", "fr", "de", "it", "es"],
+          excludeCountries: ["ca", "au"],
+          initialCountry: "us",
+          dropdownContainer: document.body,
+          showFlags: true,
+          separateDialCode: true,
+          StrictMode: true,
+    });
 
-  const htmlTelInput = document.createElement("input");
-
-  htmlTelInput.setAttribute("id", instance.data.id);
-  htmlTelInput.setAttribute("type", "tel");
-  htmlTelInput.setAttribute("name", "phone");
-        
-  const canvas = instance.canvas;
-  canvas.append(htmlTelInput);
-  canvas.css("overflow", "visible");
-  canvas.css("z-index", 100 - window.canvasPhoneInputCount);
-
-  instance.data.htmlTelInput = htmlTelInput;
+    instance.data.phoneInput.setNumber("(201) 555-0123");
+    canvas.css("overflow", "visible");
 }

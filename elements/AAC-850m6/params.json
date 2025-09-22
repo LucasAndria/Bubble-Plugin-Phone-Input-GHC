@@ -1,9 +1,10 @@
 {
+    "add_hover_pressed": false,
     "add_is_visible": true,
     "category": "input forms",
     "default_dim": {
-        "height": 200,
-        "width": 400
+        "height": 50,
+        "width": 250
     },
     "display": "Phone Input",
     "fields": {
@@ -58,7 +59,12 @@
     },
     "icon": "ion-ios-telephone",
     "property_applications": {
+        "Background": false,
+        "Border": false,
+        "BoxShadow": false,
+        "Font": false,
         "MinWidth": true,
+        "Padding": false,
         "resizable": true
     },
     "states": {
