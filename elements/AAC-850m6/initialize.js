@@ -1,27 +1,41 @@
 function(instance, properties) {
-    const input = document.createElement("input");
-    input.style.width = `${instance.canvas.width()}px`;
-    input.style.height = `${instance.canvas.height()}px`;
-    input.type = "tel";
-    
-    instance.data.htmlInput = input;
+  const input = document.createElement("input");
+  input.type = "tel";
+  input.style.width = `${instance.canvas.width()}px`;
+  input.style.height = `${instance.canvas.height()}px`;
+  instance.data.htmlInput = input;
 
-    instance.canvas.append(input);
+  instance.canvas.append(input);
 
-    instance.data.phoneInput = window.intlTelInput(input, {
-        loadUtils: () =>
-            import(
-            "https://cdn.jsdelivr.net/npm/intl-tel-input@25.10.10/build/js/utils.js"
-            ),
-          countryOrder: ["mg", "gb", "fr", "de", "it", "es"],
-          excludeCountries: ["ca", "au"],
-          initialCountry: "us",
-          dropdownContainer: document.body,
-          showFlags: true,
-          separateDialCode: true,
-          StrictMode: true,
+  input.addEventListener("input", () => instance.data.handleResponse(instance));
+  input.addEventListener("countrychange", () =>
+    instance.data.handleResponse(instance)
+  );
+
+  instance.data.handleResponse = function (instance) {
+    const iti = instance?.data?.phoneInput;
+    if (!iti) return;
+
+    const intlValue = iti.getNumber();
+    let natValue =
+      iti.getNumber(window.intlTelInput.utils.numberFormat.NATIONAL) || "";
+
+    const hasError = !iti.isValidNumber();
+    const countryData = iti.getSelectedCountryData();
+    const countryCode = countryData ? countryData.dialCode : null;
+
+    instance.publishState({
+      international_value: intlValue,
+      national_value: natValue,
+      has_error: hasError,
+      country_code: countryCode,
     });
+  };
 
-    instance.data.phoneInput.setNumber("(201) 555-0123");
-    canvas.css("overflow", "visible");
+  instance.data.setDefaultValue = function (instance, defaultNumber) {
+    if (instance.data.phoneInput) {
+      instance.data.phoneInput.setNumber(defaultNumber || "");
+      instance.data.handleResponse(instance);
+    }
+  };
 }
