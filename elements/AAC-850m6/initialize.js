@@ -1,7 +1,9 @@
 function(instance, properties) {
     const input = document.createElement("input");
-    input.width = instance.canvas.width();
-    input.height = instance.canvas.height();
+    input.style.width = `${instance.canvas.width()}px`;
+    input.style.height = `${instance.canvas.height()}px`;
+    input.type = "tel";
+    
     instance.data.htmlInput = input;
 
     instance.canvas.append(input);
